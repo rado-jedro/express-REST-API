@@ -1,0 +1,15 @@
+{
+  "name": "express-rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rado-jedro/express-rest-api.git",
+  "author": "Rado Jedro <radoslaw.jedro@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "nodemon": "1.19.1"
+  }
+}
