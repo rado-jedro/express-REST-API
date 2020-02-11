@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./../db');
-const uuidv5 = require('uuid/v5');
+const uuidv1 = require('uuid/v1');
 
 // get all seats
 router.route('/seats').get((req, res) => {
@@ -18,7 +18,7 @@ router.route('/seats/:id').get((req, res) => {
 router.route('/seats').post((req, res) => {
   const { day, seat, client, email } = req.body;
   const newSeat = {
-    id: uuidv5(),
+    id: uuidv1(),
     day: day,
     seat: seat,
     client: client,
