@@ -3,29 +3,23 @@ const express = require('express');
 const app = express();
 const uuidv1 = require('uuid/v1');
 
-let db = [
-  { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
-  {
-    id: 2,
-    author: 'Amanda Doe',
-    text: 'They really know how to make you happy.'
-  }
-];
+const db = require('./db');
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/testimonials', (req, res) => {
-  res.json(db);
+  res.json(db.testimonials);
 });
 
 app.get('/testimonials/random', (req, res) => {
-  let randomUser = db[Math.floor(Math.random() * db.length)];
+  let randomUser = db.testimonials[Math.floor(Math.random() * db.testimonials.length)];
   res.json(randomUser);
 });
 
 app.get('/testimonials/:id', (req, res) => {
-  let idUser = db.filter(({ id }) => id == req.params.id);
+  let idUser = db.testimonials.filter(({ id }) => id == req.params.id);
   res.json(idUser);
 });
 
@@ -34,22 +28,22 @@ app.post('/testimonials', (req, res) => {
     id: uuidv1(),
     message: 'OK'
   };
-  db.push(newUser);
-  res.json(db);
+  db.testimonials.push(newUser);
+  res.json(db.testimonials);
 });
 
 app.put('/testimonials/:id', (req, res) => {
-  let result = db.map(el =>
+  let result = db.testimonials.map(el =>
     el.id != req.params.id ? el : { id: el.id, message: 'OK' }
   );
-  db = result;
-  res.json(db);
+  db.testimonials = result;
+  res.json(db.testimonials);
 });
 
 app.delete('/testimonials/:id', (req, res) => {
-  let deletedUser = db.filter(el => el.id != req.params.id);
-  db = deletedUser;
-  res.json(db);
+  let deletedUser = db.testimonials.filter(el => el.id != req.params.id);
+  db.testimonials = deletedUser;
+  res.json(db.testimonials);
 });
 
 app.use((req, res) => {
