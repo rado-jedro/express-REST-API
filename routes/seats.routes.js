@@ -17,15 +17,25 @@ router.route('/seats/:id').get((req, res) => {
 //add seats
 router.route('/seats').post((req, res) => {
   const { day, seat, client, email } = req.body;
-  const newSeat = {
-    id: uuidv1(),
-    day: day,
-    seat: seat,
-    client: client,
-    email: email
-  };
-  db.seats.push(newSeat);
-  res.json(db.seats);
+  const isFree = true;
+
+  for (let booked of db.seats) {
+    if (booked.day === day && booked.seat === seat) {
+      res.json({ message: 'The slot is already taken...' });
+      isFree = false;
+    }
+  }
+  if (isFree === true) {
+    const newSeat = {
+      id: uuidv1(),
+      day: day,
+      seat: seat,
+      client: client,
+      email: email
+    };
+    db.seats.push(newSeat);
+    res.json(db.seats);
+  }
 });
 
 //edit seats
