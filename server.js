@@ -16,6 +16,11 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
 app.use('/api', seatsRoutes);
@@ -36,6 +41,6 @@ const server = app.listen(process.env.PORT || 8000, () => {
 
 const io = socket(server);
 
-io.on('connection', socket => {
+io.on('connection', () => {
   console.log('New socket! Its id – ' + socket.id);
 }); 
