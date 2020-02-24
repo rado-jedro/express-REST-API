@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Progress, Alert } from 'reactstrap';
-import io from 'socket.io';
+import io from 'socket.io-client';
 
 import './SeatChooser.scss';
 
