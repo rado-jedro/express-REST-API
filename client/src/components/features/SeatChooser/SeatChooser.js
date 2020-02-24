@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Progress, Alert } from 'reactstrap';
+import io from 'socket.io-client';
 
 import './SeatChooser.scss';
 
@@ -14,9 +15,17 @@ class SeatChooser extends React.Component {
   }
 
   componentDidMount() {
-    const { loadSeats } = this.props;
+    if (process.env.NODE_ENV === 'production') {
+      this.socket = io.connect();
+    } else {
+      this.socket = io.connect('http://localhost:8000');
+    }
+
+    const { loadSeats, loadSeatsData } = this.props;
     loadSeats();
-    this.startCounter();
+    this.socket.on('seatsUpdated', seats => {
+      loadSeatsData(seats);
+    });
   }
 
   componentWillUnmount() {
@@ -27,6 +36,11 @@ class SeatChooser extends React.Component {
     const { seats, chosenDay } = this.props;
 
     return seats.some(item => item.seat === seatId && item.day === chosenDay);
+  };
+
+  seatsCount = seats => {
+    const seatsBooked = seats.filter(i => this.isTaken(i.seat));
+    return seatsBooked.length;
   };
 
   prepareSeat = seatId => {
@@ -61,7 +75,7 @@ class SeatChooser extends React.Component {
 
   render() {
     const { prepareSeat } = this;
-    const { requests } = this.props;
+    const { requests,seats } = this.props;
 
     return (
       <div>
@@ -83,6 +97,9 @@ class SeatChooser extends React.Component {
         {requests['LOAD_SEATS'] && requests['LOAD_SEATS'].error && (
           <Alert color="warning">Couldn't load seats...</Alert>
         )}
+        <p>
+          Free seats:  {50 - this.seatsCount(seats)} / {50}
+        </p>
       </div>
     );
   }
