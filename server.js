@@ -41,6 +41,6 @@ const server = app.listen(process.env.PORT || 8000, () => {
 
 const io = socket(server);
 
-io.on('connection', () => {
+io.on('connection', socket => {
   console.log('New socket! Its id – ' + socket.id);
 }); 
