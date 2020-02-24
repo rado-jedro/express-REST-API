@@ -38,6 +38,11 @@ class SeatChooser extends React.Component {
     return seats.some(item => item.seat === seatId && item.day === chosenDay);
   };
 
+  seatsCount = seats => {
+    const seatsBooked = seats.filter(i => this.isTaken(i.seat));
+    return seatsBooked.length;
+  };
+
   prepareSeat = seatId => {
     const { chosenSeat, updateSeat } = this.props;
     const { isTaken } = this;
@@ -70,7 +75,7 @@ class SeatChooser extends React.Component {
 
   render() {
     const { prepareSeat } = this;
-    const { requests } = this.props;
+    const { requests,seats } = this.props;
 
     return (
       <div>
@@ -92,6 +97,9 @@ class SeatChooser extends React.Component {
         {requests['LOAD_SEATS'] && requests['LOAD_SEATS'].error && (
           <Alert color="warning">Couldn't load seats...</Alert>
         )}
+        <p>
+          Free seats:  {50 - this.seatsCount(seats)} / {50}
+        </p>
       </div>
     );
   }
