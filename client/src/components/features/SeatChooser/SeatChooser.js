@@ -5,15 +5,7 @@ import io from 'socket.io-client';
 import './SeatChooser.scss';
 
 class SeatChooser extends React.Component {
-  startCounter() {
-    const { loadSeats } = this.props;
-    setInterval(loadSeats, 120000);
-  }
-
-  stopCounter() {
-    clearInterval(this.startCounter);
-  }
-
+  
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') {
       this.socket = io.connect();
