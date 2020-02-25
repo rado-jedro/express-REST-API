@@ -20,10 +20,6 @@ class SeatChooser extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    this.stopCounter();
-  }
-
   isTaken = seatId => {
     const { seats, chosenDay } = this.props;
 
