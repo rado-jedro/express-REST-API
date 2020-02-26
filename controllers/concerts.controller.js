@@ -1,5 +1,5 @@
 const Concert = require('../models/concert.model');
-const uuidv1 = require('uuid/v1');
+//const uuidv1 = require('uuid/v1');
 
 exports.getAll = async (req, res) => {
   try {
@@ -20,10 +20,10 @@ exports.getSingleRecord = async (req, res) => {
 };
 
 exports.postRecord = async (req, res) => {
-  const { performer, genre, price, day, image } = req.body;
+  const { id, performer, genre, price, day, image } = req.body;
   try {
     const newConcert = new Concert({
-      id: uuidv1(),
+      id: id,
       performer: performer,
       genre: genre,
       price: price,
@@ -38,10 +38,11 @@ exports.postRecord = async (req, res) => {
 };
 
 exports.updateRecord = async (req, res) => {
-  const { performer, genre, price, day, image } = req.body;
+  const { id, performer, genre, price, day, image } = req.body;
   try {
     const con = await Concert.findById(req.params.id);
     if (con) {
+      con.id = id;
       con.performer = performer;
       con.genre = genre;
       con.price = price;
