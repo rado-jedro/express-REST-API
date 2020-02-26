@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const socket = require('socket.io'); 
-
+const socket = require('socket.io');
+const mongoose = require('mongoose');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
@@ -36,11 +36,22 @@ app.use((req, res) => {
 });
 
 const server = app.listen(process.env.PORT || 8000, () => {
-    console.log('Server is running on port: 8000');
+  console.log('Server is running on port: 8000');
 });
+
+// connects our backend code with the database
+mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
+  useNewUrlParser: true
+});
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Connected to the database');
+});
+db.on('error', err => console.log('Error ' + err));
 
 const io = socket(server);
 
 io.on('connection', socket => {
   console.log('New socket! Its id – ' + socket.id);
-}); 
+});
