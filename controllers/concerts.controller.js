@@ -46,8 +46,8 @@ exports.updateRecord = async (req, res) => {
       con.performer = performer;
       con.genre = genre;
       con.price = price;
-      day = day;
-      image = image;
+      con.day = day;
+      con.image = image;
       await con.save();
       res.json({ message: 'OK' });
     } else res.status(404).json({ message: 'Not found...' });
