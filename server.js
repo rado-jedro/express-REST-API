@@ -40,7 +40,7 @@ const server = app.listen(process.env.PORT || 8000, () => {
 });
 
 // connects our backend code with the database
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
+mongoose.connect('mongodb+srv://rado-jedro:Pa55w0rd@cluster0-z3fpm.mongodb.net/NewWaveDB', {
   useNewUrlParser: true
 });
 const db = mongoose.connection;
