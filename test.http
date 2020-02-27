@@ -1,0 +1,123 @@
+//concerts
+
+GET http://localhost:8000/api/concerts/
+
+###
+
+GET http://localhost:8000/api/concerts/5e568bc589f7a483f64991aa
+
+###
+
+POST http://localhost:8000/api/concerts
+content-type: application/json
+
+{
+    "id": 1,
+    "performer": "Bob12113",
+    "genre": "Any",
+    "price": 123,
+    "day": 1,
+    "image": "anyImage"
+}
+
+###
+
+PUT http://localhost:8000/api/concerts/5e56ab632b98d28344490e61
+content-type: application/json
+
+{
+    "id": 1,
+    "performer": "Chris",
+    "genre": "Rock",
+    "price": 9876,
+    "day": 1,
+    "image": "anyImage2"
+}
+
+###
+
+
+DELETE http://localhost:8000/api/concerts/5e56a6111711d084d04f0146
+
+###
+
+//testimonials
+
+GET http://localhost:8000/api/testimonials/
+
+###
+
+GET http://localhost:8000/api/testimonials/random
+
+
+###
+GET http://localhost:8000/api/testimonials/5e568b7f89f7a483f64991a9
+
+###
+
+POST http://localhost:8000/api/testimonials
+content-type: application/json
+
+{
+    "id": 10,
+    "author": "Gall Anonim",
+    "text": "Lorem Ipsum"
+}
+
+###
+
+PUT http://localhost:8000/api/testimonials/5e56bf82ee0ed28fc4130ad0
+content-type: application/json
+
+{
+    "id": 1011,
+    "author": "Gall Anonim 1234",
+    "text": "Random Text1"  
+}
+
+###
+
+DELETE http://localhost:8000/api/testimonials/5e56bfa3ee0ed28fc4130ad2
+
+###
+
+
+//seats
+
+GET http://localhost:8000/api/seats/
+
+
+###
+GET http://localhost:8000/api/seats/5e568be689f7a483f64991ae
+
+###
+
+POST http://localhost:8000/api/seats
+content-type: application/json
+
+{
+    "id": 10,
+    "day": 2,
+    "seat": 25,
+    "client": "John Wayne",
+    "email": "john@wayne.com"
+}
+
+###
+
+PUT http://localhost:8000/api/seats/5e56d02de1a0b196a4436ffb
+content-type: application/json
+
+{
+    "id": 10,
+    "day": 2,
+    "seat": 15,
+    "client": "John Smith",
+    "email": "john@smith.com"  
+}
+
+###
+
+DELETE http://localhost:8000/api/seats/5e56d081e1a0b196a4436ffc
+
+###
