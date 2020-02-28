@@ -15,7 +15,7 @@
     "mongo-sanitize": "1.0.1",
     "mongoose": "^5.9.2",
     "nodemon": "1.19.1",
-    "snyk": "1.235.0",
+    "snyk": "1.290.1",
     "socket.io": "^2.3.0",
     "uuid": "^3.4.0"
   }
