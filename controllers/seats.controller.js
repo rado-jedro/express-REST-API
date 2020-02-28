@@ -1,4 +1,5 @@
 const Seat = require('../models/seat.model');
+const sanitize = require('mongo-sanitize'); 
 
 exports.getAll = async (req, res) => {
   try {
@@ -19,7 +20,7 @@ exports.getSingleRecord = async (req, res) => {
 };
 
 exports.postRecord = async (req, res) => {
-  const { id, day, seat, client, email } = req.body;
+  const { id, day, seat, client, email } = sanitize(req.body);
   try {
     const newSeat = new Seat({
       id: id,
@@ -36,7 +37,7 @@ exports.postRecord = async (req, res) => {
 };
 
 exports.updateRecord = async (req, res) => {
-  const { id, day, seat, client, email } = req.body;
+  const { id, day, seat, client, email } = sanitize(req.body);
   try {
     const singleSeat = await Seat.findById(req.params.id);
     if (singleSeat) {

@@ -1,5 +1,5 @@
 const Concert = require('../models/concert.model');
-//const uuidv1 = require('uuid/v1');
+const sanitize = require('mongo-sanitize'); 
 
 exports.getAll = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ exports.getSingleRecord = async (req, res) => {
 };
 
 exports.postRecord = async (req, res) => {
-  const { id, performer, genre, price, day, image } = req.body;
+  const { id, performer, genre, price, day, image } = sanitize(req.body);
   try {
     const newConcert = new Concert({
       id: id,
@@ -38,7 +38,7 @@ exports.postRecord = async (req, res) => {
 };
 
 exports.updateRecord = async (req, res) => {
-  const { id, performer, genre, price, day, image } = req.body;
+  const { id, performer, genre, price, day, image } = sanitize(req.body);
   try {
     const con = await Concert.findById(req.params.id);
     if (con) {
