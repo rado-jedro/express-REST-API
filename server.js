@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
@@ -34,6 +35,8 @@ app.use((req, res) => {
     message: '404 - not found'
   });
 });
+
+app.use(helmet()); 
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
